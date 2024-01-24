@@ -1,0 +1,50 @@
+
+Option Explicit
+
+Dim attempts
+attempts = 0
+
+' Function to display message box based on the number of attempts
+Function DisplayMessageBox(message)
+    MsgBox message, vbInformation, "Marry Me Prank"
+End Function
+
+' Function to handle the "No" button click
+Sub HandleNoButtonClick()
+    attempts = attempts + 1
+    
+    If attempts = 1 Then
+        DisplayMessageBox "Marry me baby!"
+    ElseIf attempts = 2 Then
+        DisplayMessageBox " babyy Please..."
+    ElseIf attempts >= 3 Then
+        DisplayMessageBox "fcuk you!"
+        WScript.Quit
+    End If
+End Sub
+
+' Function to handle the "Yes" button click
+Sub HandleYesButtonClick()
+    DisplayMessageBox "Love you! ❤️"
+    WScript.Quit
+End Sub
+
+' Main script
+
+Dim response
+response = InputBox("Will you marry me?", "Marry Me Prank")
+
+Do While True
+    If UCase(response) = "YES" Then
+        HandleYesButtonClick
+        Exit Do
+    ElseIf UCase(response) = "NO" Then
+        HandleNoButtonClick
+    Else
+        ' Display message if the user enters an invalid response
+        DisplayMessageBox "Please answer in 'Yes' or 'No'."
+    End If
+    
+    ' Prompt again for a response
+    response = InputBox("Will you marry me?", "Marry Me Prank")
+Loop
